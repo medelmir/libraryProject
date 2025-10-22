@@ -1,0 +1,16 @@
+package fr.univtours.polytech.tpeval.controller;
+
+import fr.univtours.polytech.tpeval.model.BorrowedList;
+import fr.univtours.polytech.tpeval.model.Library;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
+
+@WebServlet(name = "CatalogServlet", urlPatterns = {"/catalog"})
+public class CatalogServlet extends HttpServlet {
+
+}
