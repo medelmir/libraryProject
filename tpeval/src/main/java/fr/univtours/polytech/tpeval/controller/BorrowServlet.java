@@ -11,7 +11,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.List;
+import java.util.ArrayList;
 
-@WebServlet(name = "BorrowServlet", urlPatterns = {"/borrowed", "/reserve", "/return"})
+@WebServlet(name = "BorrowServlet", urlPatterns = {"/borrowed"})
 public class BorrowServlet extends HttpServlet {
 }
