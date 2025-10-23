@@ -68,5 +68,8 @@
             </c:forEach>
         </tbody>
     </table>
+    <p>
+        <a href="borrowed">Voir ma liste d'emprunts et finaliser la commande</a>
+    </p>
 </body>
 </html>

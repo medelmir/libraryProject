@@ -27,6 +27,7 @@ public class CatalogServlet extends HttpServlet {
         library.addBook(new Book("1122334455", "Python Programming", "Alice Johnson", 5,"Master Python", "physical"));
         library.addBook(new Book("5544332211", "Data Science", "Bob Brown", 4,"Data analysis techniques", "online"));
         library.addBook(new Book("6677889900", "Machine Learning", "Charlie Davis", 1,"Intro to ML", "physical"));
+        getServletContext().setAttribute("library", library);
     }
 
     @Override

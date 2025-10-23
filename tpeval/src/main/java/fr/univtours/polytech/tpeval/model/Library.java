@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional; 
 
 
 public class Library implements Serializable {
@@ -17,7 +18,15 @@ public class Library implements Serializable {
         books.add(book);
     }
 
+
     public List<Book> getAllBooks() {
         return Collections.unmodifiableList(books);
+    }
+
+
+    public Optional<Book> getBookByIsbn(String isbn) {
+        return this.books.stream()
+                .filter(book -> book.getIsbn().equals(isbn))
+                .findFirst();
     }
 }
