@@ -20,4 +20,8 @@ public class Library implements Serializable {
     public List<Book> getAllBooks() {
         return Collections.unmodifiableList(books);
     }
+
+    public void removeBook(Book book) {
+        books.remove(book);
+    }
 }
