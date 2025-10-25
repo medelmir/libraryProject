@@ -8,22 +8,21 @@ import java.util.Optional;
 
 
 public class Library implements Serializable {
-    private List<Book> books;
+    private final List<Book> books = new ArrayList<>();
 
     public Library() {
-        this.books = new ArrayList<>();
     }
 
     public void addBook(Book book) {
         books.add(book);
     }
 
-
     public List<Book> getAllBooks() {
-        return Collections.unmodifiableList(books);
+        // Retourne la liste interne (modifiables) pour que le contrôleur puisse changer 'availableCopies'
+        return this.books; 
     }
 
-
+    /** Permet au contrôleur de trouver le livre par ISBN pour mettre à jour les copies. */
     public Optional<Book> getBookByIsbn(String isbn) {
         return this.books.stream()
                 .filter(book -> book.getIsbn().equals(isbn))

@@ -1,43 +1,64 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Livres Empruntés</title>
+    <title>Mes livres empruntés</title>
     <style>
         table {
-            width: 80%;
+            width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            background-color: #ffffff; 
         }
         th, td {
             padding: 10px;
             text-align: left;
-            border: 1px solid #ddd;
+            border: 3px solid #ddd;
         }
         th {
             background-color: #f4f4f4;
         }
-        .btn-return {
+        .btn-rendre {
             padding: 5px 10px;
-            background-color: #FF5733; 
+            background-color: #bd4343; /* Rouge */
             color: white;
             border: none;
             border-radius: 3px;
             cursor: pointer;
         }
-        .btn-return:hover {
-            background-color: #C70039;
+        .btn-rendre:hover {
+            background-color: #a04545;
+        }
+         .background-image img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        opacity: 0.3;
+        filter: blur(2px);
         }
         .message {
             color: green;
             font-weight: bold;
             margin-bottom: 10px;
         }
+        .nav-links a {
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 15px;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
-    <h1>Vos Livres Empruntés</h1>
+    <div class="background-image">
+        <img src="https://expodif.fr/wp-content/uploads/2022/04/Bibliotheque-de-livres.png" alt="">
+    </div>
+    <h2>Mes livres empruntés</h2>
 
     <c:if test="${not empty sessionScope.message}">
         <p class="message">${sessionScope.message}</p>
@@ -66,23 +87,24 @@
                             <td>${book.isbn}</td>
                             <td>${book.format}</td>
                             <td>
-                                <form action="return" method="post">
-                                    <input type="hidden" name="isbn" value="${book.isbn}">
-                                    <button type="submit" class="btn-return">Rendre</button>
+                                <form method="post" action="return"> 
+                                    <input type="hidden" name="isbn" value="${book.isbn}" />
+                                    <button type="submit" class="btn-rendre">Rendre</button>
                                 </form>
                             </td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
-            <p style="margin-top: 20px;">
-                <a href="catalog">Retour au Catalogue</a> | <a href="checkout">Finaliser la Commande</a>
-            </p>
         </c:when>
         <c:otherwise>
-            <p>Vous n'avez actuellement aucun livre emprunté. <a href="catalog">Parcourir le catalogue</a>.</p>
+            <p>Aucun livre emprunté.</p>
         </c:otherwise>
     </c:choose>
 
+    <div class="nav-links" style="margin-top: 20px;">
+        <a href="catalog" style="background-color: #d1b01d; color: white;">Retour au catalogue</a>
+        <a href="checkout" style="background-color: #4CAF50; color: white;">Procéder au checkout</a>
+    </div>
 </body>
 </html>

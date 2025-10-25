@@ -48,7 +48,6 @@ public class BorrowServlet extends HttpServlet {
             return;
         }
 
-    
         HttpSession session = request.getSession(); 
         
         BorrowedList borrowedList = (BorrowedList) session.getAttribute("borrowedList");
@@ -58,17 +57,16 @@ public class BorrowServlet extends HttpServlet {
         }
 
         if (path.equals("/borrow")) {
-        
+            // Gère l'action d'emprunt depuis le catalogue
             handleBorrow(isbn, borrowedList, session, request, response); 
         } else if (path.equals("/return")) {
-            
+            // Gère l'action de retour depuis la page borrowed.jsp
             handleReturn(isbn, borrowedList, session, request, response);
         } else {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
-    
     private void handleBorrow(String isbn, BorrowedList borrowedList, HttpSession session, 
                               HttpServletRequest request, HttpServletResponse response) 
                               throws ServletException, IOException {
@@ -80,7 +78,7 @@ public class BorrowServlet extends HttpServlet {
             
             if (book.getAvailableCopies() > 0) {
                 
-                book.setAvailableCopies(book.getAvailableCopies() - 1);
+                book.setAvailableCopies(book.getAvailableCopies() - 1); 
                 
                 Book borrowedBookCopy = new Book(book.getIsbn(), book.getTitle(), 
                                                  book.getAuthor(), 1, 
@@ -88,21 +86,17 @@ public class BorrowServlet extends HttpServlet {
 
                 borrowedList.addBook(borrowedBookCopy);
 
-                
                 session.setAttribute("message", "Book reserved successfully: " + book.getTitle()); 
             } else {
-                
                 session.setAttribute("message", "Cannot reserve " + book.getTitle() + ". No copies available.");
             }
         } else {
-            
             session.setAttribute("message", "Error: Book not found in the catalog.");
         }
         
-        response.sendRedirect(request.getContextPath() + "/catalog");
+        // Redirige vers le catalogue pour montrer la décrémentation des copies
+        response.sendRedirect(request.getContextPath() + "/catalog"); 
     }
-
-    
 
     private void handleReturn(String isbn, BorrowedList borrowedList, HttpSession session, 
                               HttpServletRequest request, HttpServletResponse response) 
@@ -116,19 +110,17 @@ public class BorrowServlet extends HttpServlet {
             if (libraryBookOpt.isPresent()) {
                 Book libraryBook = libraryBookOpt.get();
                 
-                libraryBook.setAvailableCopies(libraryBook.getAvailableCopies() + 1);
-                
+                libraryBook.setAvailableCopies(libraryBook.getAvailableCopies() + 1); 
                 
                 session.setAttribute("message", "Book returned successfully: " + libraryBook.getTitle()); 
             } else {
-               
                 session.setAttribute("message", "Warning: Book returned but not found in main catalog.");
             }
         } else {
-           
             session.setAttribute("message", "Error: Book not found in your borrowed list.");
         }
         
-        response.sendRedirect(request.getContextPath() + "/borrowed");
+        // Redirige vers la liste des emprunts pour montrer le retrait du livre
+        response.sendRedirect(request.getContextPath() + "/borrowed"); 
     }
 }
