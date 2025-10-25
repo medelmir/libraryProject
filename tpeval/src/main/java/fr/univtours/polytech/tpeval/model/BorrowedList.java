@@ -1,43 +1,77 @@
 package fr.univtours.polytech.tpeval.model;
 
 import java.io.Serializable;
+import java.util.ArrayList; 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.List; 
 
 /**
- * Modèle : Maintient la liste des livres empruntés par un utilisateur (dans la session).
+ * Represents the list of books borrowed by a user during their session (Model).
+ * The implementation uses a List to allow multiple copies of the same book to be borrowed,
+ * ensuring consistency with stock decrement.
  */
 public class BorrowedList implements Serializable {
     
-    private final Map<String, Book> borrowedBooks;
+    // CRITICAL CHANGE: The Map is replaced by a List to allow correct counting of copies.
+    private final List<Book> borrowedBooks = new ArrayList<>();
 
+    /**
+     * Map storing the borrowed books. The key is the book's ISBN (String)
+     * and the value is the Book object.
+     */
+    // (The initial Javadoc referring to Map is kept, but the implementation uses List for functionality)
+
+    /**
+     * Default constructor that initializes the internal List.
+     */
     public BorrowedList() {
-        this.borrowedBooks = new LinkedHashMap<>();
+        // The List is initialized above
     }
 
-    /** Ajoute un livre (copie) à la liste empruntée. */
+    /**
+     * Adds a book to the borrowed list. Allows duplicates of the same book.
+     * @param book The book (a copy of the catalogue book) to add to the user's borrowed items.
+     */
     public void addBook(Book book) {
-        this.borrowedBooks.put(book.getIsbn(), book);
+        this.borrowedBooks.add(book);
     }
 
-    /** Retire un livre de la liste par ISBN. */
+    /**
+     * Removes a book from the borrowed list using its ISBN.
+     * This method searches linearly (O(N)) to remove the first match.
+     * @param isbn The ISBN of the book to remove.
+     * @return The removed book, or null if the ISBN was not present.
+     */
     public Book removeBook(String isbn) {
-        return this.borrowedBooks.remove(isbn);
+        for (int i = 0; i < borrowedBooks.size(); i++) {
+            if (borrowedBooks.get(i).getIsbn().equals(isbn)) {
+                // Remove the first book found with this ISBN
+                return borrowedBooks.remove(i);
+            }
+        }
+        return null;
     }
 
-    /** Récupère la collection de tous les livres empruntés (Méthode utilisée partout). */
+    /**
+     * Retrieves the collection of all currently borrowed books.
+     * @return The modifiable list of borrowed Book objects.
+     */
     public Collection<Book> getBooks() {
-        return Collections.unmodifiableCollection(this.borrowedBooks.values());
+        // Returns the List, which may contain duplicates
+        return this.borrowedBooks; 
     }
 
-    /** Vérifie si la liste est vide. */
+    /**
+     * Checks if the borrowed list is empty.
+     * @return True if no books are borrowed, False otherwise.
+     */
     public boolean isEmpty() {
         return this.borrowedBooks.isEmpty();
     }
     
-    /** Ajouté pour permettre la réinitialisation (action 'cancel' ou 'confirm'). */
+    /**
+     * Clears the list of borrowed books after confirmation or cancellation of the checkout.
+     */
     public void clear() {
         this.borrowedBooks.clear();
     }

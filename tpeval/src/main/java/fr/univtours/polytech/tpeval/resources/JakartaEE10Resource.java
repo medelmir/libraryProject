@@ -6,7 +6,7 @@ import jakarta.ws.rs.core.Response;
 
 /**
  *
- * @author 
+ * @author Kassemi Mohamed Amine & Mohamed El Mir
  */
 @Path("jakartaee10")
 public class JakartaEE10Resource {
