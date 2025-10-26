@@ -18,7 +18,7 @@ import java.util.Optional;
  * Controller managing all actions related to borrowing and returning books.
  * It is mapped to the URLs /borrowed (display), /borrow (borrow action), and /return (return action).
  */
-@WebServlet(name = "BorrowServlet", urlPatterns = {"/borrowed", "/borrow", "/return"})
+@WebServlet(name = "BorrowServlet", urlPatterns = {"/borrowed"})
 public class BorrowServlet extends HttpServlet {
     
     /** Reference to the Library Model stored in the application context. */

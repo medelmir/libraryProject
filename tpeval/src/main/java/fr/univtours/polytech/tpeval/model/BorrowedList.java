@@ -12,15 +12,7 @@ import java.util.List;
  */
 public class BorrowedList implements Serializable {
     
-    // CRITICAL CHANGE: The Map is replaced by a List to allow correct counting of copies.
     private final List<Book> borrowedBooks = new ArrayList<>();
-
-    /**
-     * Map storing the borrowed books. The key is the book's ISBN (String)
-     * and the value is the Book object.
-     */
-    // (The initial Javadoc referring to Map is kept, but the implementation uses List for functionality)
-
     /**
      * Default constructor that initializes the internal List.
      */

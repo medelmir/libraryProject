@@ -5,7 +5,6 @@
 <head>
     <title>Catalogue de la bibliothèque</title>
     <style>
-        /* Ajout de styles généraux pour le corps de la page */
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
@@ -14,13 +13,11 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            /* Rétablissement de la couleur de fond */
             background-color: #ffffff; 
         }
         th, td {
             padding: 10px;
             text-align: left;
-            /* Rétablissement de la bordure (ajustée à 1px pour la cohérence) */
             border: 1px solid #ddd;
         }
         th {
@@ -28,7 +25,7 @@
         }
         .btn-borrow {
             padding: 5px 10px;
-            background-color: #4CAF50; /* Vert */
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 3px;

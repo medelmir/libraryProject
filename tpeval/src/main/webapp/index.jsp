@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Page d'accueil de la bibliothèque</title>
     <style>
-        /* Styles généraux */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f7f7f7;
@@ -35,27 +34,26 @@
             z-index: 10;
         }
         
-        /* Style des liens (boutons) */
         a {
             text-decoration: none;
             color: #333333;
-            display: block; /* Changé de grid à block */
+            display: block; 
             padding: 15px 20px;
             border: 2px solid #333333;
             text-align: center;
             transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-            border-radius: 8px; /* Ajout de coins arrondis */
+            border-radius: 8px; 
             font-weight: bold;
         }
         a:hover {
-            background-color: #ecad1d; /* Jaune doré (plus stylé) */
+            background-color: #ecad1d; 
             color: #ffffff;
             border-color: #ecad1d;
         }
         
-        /* Style de l'image de fond */
+      
         .background-image img {
-            position: fixed; /* Mieux que absolute pour le scroll */
+            position: fixed; 
             top: 0;
             left: 0;
             width: 100%;

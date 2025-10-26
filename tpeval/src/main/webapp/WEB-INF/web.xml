@@ -39,7 +39,6 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>catalog</welcome-file> 
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
